@@ -25,7 +25,7 @@ var tjt = new TheiaJSONView(data, 'mydiv')
 
 ## API
 
-### `PPJSONView([json [, element[, config] ]])`
+### `TheiaJSONView([json [, element[, config] ]])`
 
 #### `json` (`Object` or `String`)
 
