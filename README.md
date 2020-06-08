@@ -1,4 +1,4 @@
-# Theia JSON Viewer
+# Theia JSON View
 
 > Display JSON objects in HTML including **collapsible** navigation.
 
@@ -9,7 +9,7 @@
 Copy sources from git repository and link the minified file to your HTML document:
 
 ```html
-<script src="TheiaJSONViewer/dist/TheiaJSONViewer.min.js"></script>
+<script src="TheiaJSONView/dist/TheiaJSONView.min.js"></script>
 ```
 
 ## Usage
