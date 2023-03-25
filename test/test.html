@@ -1,315 +1,318 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Theia JSON Viewer Demo</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="test.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&family=Open+Sans&family=Coming+Soon&family=Luckiest+Guy&family=Monofett&family=Pacifico&family=Source+Code+Pro&display=swap" rel="stylesheet">
+	<title>Theia JSON Viewer Demo</title>
 
-  </head>
-  <body>
-    <article>
-      <header>
-        <img src="theia-menu.png" alt="Theia Series Icon" />
-        <h1>Theia JSON View</h1>
-        <p>By Chris Rowley<br /><a href="https://github.com/clubside">https://github.com/clubside</a></p>
-        <p><em>&ldquo;There are many like it, but this one is mine.&rdquo;</em></p>
-        <section>Visualize your JavaScript/JSON data with syntax highlighting, collapsible nodes, inline links and images plus other customizations. Choose an example dataset from the list or provide your own. The viewer itself offers a fullsreen mode in capable browsers, enlarge and shrink buttons to size the area for mobile devices without <code>resize</code> support, and copy data to clipboard functionality.</section>
-      </header>
-      <section class="demo_data">
-        <div>
-          <label for="exlist">Examples</label>
-          <select id="exlist" name="exlist" tabindex="1">
-            <option value="">{ Sample JSON }</option>
-            <option value="inline-advworks">AdventureWorks2014 (SQL Server Definition)</option>
-            <option value="inline-sakila">sakila (MySQL Definition)</option>
-            <option value="https://public-us.opendatasoft.com/api/records/1.0/search/?dataset=us-colleges-and-universities&q=&rows=50&facet=city&facet=state&facet=naics_desc">opendatasoft: 50 US Colleges and Universities</option>
-            <option value="https://public-us.opendatasoft.com/api/records/1.0/search/?dataset=open-beer-database&q=&rows=50&facet=style_name&facet=cat_name&facet=name_breweries&facet=brewer&facet=alcohol_by_volume&refine.country=Germany">opendatasoft: 50 Open Beer Database (Germany)</option>
-            <option value="https://api.tvmaze.com/singlesearch/shows?q=the-walking-dead&embed=episodes">TV Maze: The Walking Dead</option>
-            <option value="https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes">TV Maze: Rick & Morty</option>
-            <option value="https://www.reddit.com/r/gaming.json">Reddit: r/gaming</option>
-            <option value="https://api.github.com/emojis">GitHub: Emoji</option>
-            <option value="https://api.github.com/meta">GitHub: Meta</option>
-          </select>
-        </div>
-        <div>
-          <label for="extext">Enter JSON or URL</label>
-          <textarea id="extext" name="extext" placeholder="{ &hellip; }" tabindex="2"></textarea>
-          <div class="demo_button_holder"><button class="demo_button" id="demo_custom" name="demo_custom" type="button" tabindex="3">VIEW</button></div>
-        </div>
-      </section>
-      <section class="demo_display">
-        <article>
-          <div id="jsonholder">
-          </div>
-        </article>
-      </section>
-      <section class="demo_options">
-        <article>
-          <div>
-            <label for="viewtheme">Theme</label>
-            <select id="viewtheme" name="viewtheme" tabindex="100">
-              <option value="default">Default</option>
-              <option value="light">Light</option>
-              <option value="dark">Dark</option>
-              <option value="material">Material</option>
-            </select>
-          </div>
-          <div>
-            <label for="viewoutput">Format</label>
-            <select id="viewoutput" name="viewoutput" tabindex="101">
-              <option value="html">HTML</option>
-              <option value="plain">Plain</option>
-              <option value="debug">Debug</option>
-            </select>
-          </div>
-        </article>
-        <article>
-          <div>
-            <label for="viewfont">Font Family</label>
-            <input id="viewfont" name="viewfont" type="text" list="fonts" size="15" tabindex="102">
-            <datalist id="fonts">
-              <option>Poppins</option>
-              <option>Merriweather</option>
-              <option>"Fira Sans"</option>
-              <option>"Open Sans"</option>
-              <option>"Cooper Black"</option>
-              <option>"Segoe UI"</option>
-              <option>Jokerman</option>
-              <option>Pacifico</option>
-              <option>"Coming Soon"</option>
-              <option>"Source Code Pro"</option>
-              <option>"Luckiest Guy"</option>
-              <option>Monofett</option>
-            </datalist>
-          </div>
-          <div>
-            <label for="viewsize">Font Size</label>
-            <input id="viewsize" name="viewsize" type="text" list="sizes" size="10" tabindex="103">
-            <datalist id="sizes">
-              <option>1rem</option>
-              <option>1.5rem</option>
-              <option>2rem</option>
-              <option>24px</option>
-              <option>2vmin</option>
-              <option>clamp(100%, 1rem + 2vw, 24px)</option>
-            </datalist>
-          </div>
-        </article>
-        <article>
-          <div>
-            <label for="viewcollapse">Auto Collapse</label>
-            <select id="viewcollapse" name="viewcollapse" tabindex="104">
-              <option value="0">Off</option>
-              <option value="5">5 Levels</option>
-              <option value="4">4 Levels</option>
-              <option value="3">3 Levels</option>
-              <option value="2">2 Levels</option>
-              <option value="1">1 Level</option>
-            </select>
-          </div>
-          <div>
-            <label for="allowcollapse">Allow Collapse</label>
-            <input id="allowcollapse" name="allowcollapse" type="checkbox" checked="checked" tabindex="105">
-          </div>
-        </article>
-        <article>
-          <div>
-            <label for="itemcounts">Item Counts</label>
-            <input id="itemcounts" name="itemcounts" type="checkbox" tabindex="106">
-          </div>
-          <div>
-            <label for="itemnumbers">Item Numbers</label>
-            <input id="itemnumbers" name="itemnumbers" type="checkbox" tabindex="107">
-          </div>
-        </article>
-        <article>
-          <div>
-            <label for="viewrollups">Roll-ups</label>
-            <input id="viewrollups" name="viewrollups" type="checkbox" tabindex="108">
-          </div>
-        </article>
-      </section>
-      <footer>
-        <h2>OPTIONS</h2>
-        <hr />
-        <section>
-          <div>Theme</div>
-          <div>Theia comes with four themes used for syntax highlighting. The <em>default</em> theme uses Theia&rsquo;s blue branding while the others conform to common color schemes seen in Web development. This represents the <code>.json</code> property.</div>
-          <div>Format</div>
-          <div>While most users will only use the <em>HTML</em> format option, Theia can also display the raw JSON using <em>Plain</em> as well as a <em>Debug</em> view which shows all of the current settings. These represent the three Methods of the object: <code>.html()</code>, <code>.plain()</code> and <code>.debug()</code>.</div>
-          <div>Font<br />Family</div>
-          <div>You can override Theia&rsquo;s default font with any valid <code>font-family</code> value. A number of <a href="https://fonts.google.com/">Google Fonts</a> are attached to the demo in addition to two fonts (Jokerman and Cooper Black) that will only display properly if you have them loaded locally. This represents the <code>.fontfamily</code> property.</div>
-          <div>Font<br />Size</div>
-          <div>Theia defaults to 1rem for font size. Any valid <code>font-size</code> value entered here will override that setting. Examples using different techniques are provided in the list. This represents the <code>.fontsize</code> property.</div>
-          <div>Auto<br />Collapse</div>
-          <div>The default setting of <em>Off</em> will display the entire data tree fully expanded. The other settings will render any node below the selected value collapsed requiring you to expand each of those nodes manually. This represents the <code>.autocollapse</code> property.</div>
-          <div>Allow<br />Collapse</div>
-          <div>Disabling this option will prevent expand/collapse functionality. Combined with Auto Collapse you can restrict how deep the data will render. This represents the <code>.allowcollapse</code> property.</div>
-          <div>Item<br />Counts</div>
-          <div>Theia defaults to a &ldquo;clean&rdquo; display, showing just the data elements. Enabling this option will display a count of the number of descendant items of any array or object. This represents the <code>.itemcounts</code> property.</div>
-          <div>Item<br />Numbers</div>
-          <div>Array and Object members don&rsquo;t have keys, but enabling this option will display each item&rsquo;s member number. This represents the <code>.itemnumbers</code> property.</div>
-          <div>Roll-ups</div>
-          <div>It would be nice to see Object member names rather than numbers, particularly in collapsed views. Enabling this option will instruct Theia to look for the singular of the parent Object's key and create a virtual key. You can see how this works using either the <em>AdventureWorks2014</em> or <em>sakila</em> example datasets which will roll-up objects, columns and views. This represents the <code>.rollups</code> property.</div>
-        </section>
-        <h2>USAGE</h2>
-        <hr />
-        <article>
-          <div>Theia JSON View is a single file, which dynamically creates needed CSS and SVG elements. Load the <code>TheiaJSONView.js</code> with any other scripts and then create an <code>new</code> instance of <code>TheiaJSONView</code> then pass your display container&rsquo;s <code>id</code> to <code>.html()</code>.</div>
-          <div>
-            <pre>
+	<link href="test.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Fira+Sans&family=Open+Sans&family=Coming+Soon&family=Luckiest+Guy&family=Monofett&family=Pacifico&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+	<article>
+		<header>
+			<img src="theia-menu.png" alt="Theia Series Icon" />
+			<h1>Theia JSON View</h1>
+			<p>By Chris Rowley<br /><a href="https://github.com/clubside">https://github.com/clubside</a></p>
+			<p><em>&ldquo;There are many like it, but this one is mine.&rdquo;</em></p>
+			<section>Visualize your JavaScript/JSON data with syntax highlighting, collapsible nodes, inline links and images plus other customizations. Choose an example dataset from the list or provide your own. The viewer itself offers a fullsreen mode in capable browsers, enlarge and shrink buttons to size the area for mobile devices without <code>resize</code> support, and copy data to clipboard functionality.</section>
+		</header>
+		<section class="demo_data">
+			<div>
+				<label for="exlist">Examples</label>
+				<select id="exlist" name="exlist" tabindex="1">
+					<option value="">{ Sample JSON }</option>
+					<option value="inline-advworks">AdventureWorks2014 (SQL Server Definition)</option>
+					<option value="inline-sakila">sakila (MySQL Definition)</option>
+					<option value="http://universities.hipolabs.com/search?country=United+States">hipolabs: Universities</option>
+					<option value="https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita">thecocktaildb: Margarita</option>
+					<option value="https://api.tvmaze.com/shows/73?embed=episodes">TV Maze: The Walking Dead</option>
+					<option value="https://api.tvmaze.com/shows/216?embed=episodes">TV Maze: Rick & Morty</option>
+					<option value="https://www.reddit.com/r/gaming.json">Reddit: r/gaming</option>
+					<option value="https://api.github.com/emojis">GitHub: Emoji</option>
+					<option value="https://api.github.com/meta">GitHub: Meta</option>
+				</select>
+			</div>
+			<div>
+				<label for="extext">Enter JSON or URL</label>
+				<textarea id="extext" name="extext" placeholder="{ &hellip; }" tabindex="2"></textarea>
+				<div class="demo_button_holder"><button class="demo_button" id="demo_custom" name="demo_custom" type="button" tabindex="3">VIEW</button></div>
+			</div>
+		</section>
+		<section class="demo_display">
+			<article>
+				<div id="jsonholder">
+				</div>
+			</article>
+		</section>
+		<section class="demo_options">
+			<article>
+				<div>
+					<label for="viewtheme">Theme</label>
+					<select id="viewtheme" name="viewtheme" tabindex="100">
+						<option value="default">Default</option>
+						<option value="light">Light</option>
+						<option value="dark">Dark</option>
+						<option value="material">Material</option>
+					</select>
+				</div>
+				<div>
+					<label for="viewoutput">Format</label>
+					<select id="viewoutput" name="viewoutput" tabindex="101">
+						<option value="html">HTML</option>
+						<option value="plain">Plain</option>
+						<option value="debug">Debug</option>
+					</select>
+				</div>
+			</article>
+			<article>
+				<div>
+					<label for="viewfont">Font Family</label>
+					<input id="viewfont" name="viewfont" type="text" list="fonts" size="15" tabindex="102">
+					<datalist id="fonts">
+						<option>Poppins</option>
+						<option>Merriweather</option>
+						<option>"Fira Sans"</option>
+						<option>"Open Sans"</option>
+						<option>"Cooper Black"</option>
+						<option>"Segoe UI"</option>
+						<option>Jokerman</option>
+						<option>Pacifico</option>
+						<option>"Coming Soon"</option>
+						<option>"Source Code Pro"</option>
+						<option>"Luckiest Guy"</option>
+						<option>Monofett</option>
+					</datalist>
+				</div>
+				<div>
+					<label for="viewsize">Font Size</label>
+					<input id="viewsize" name="viewsize" type="text" list="sizes" size="10" tabindex="103">
+					<datalist id="sizes">
+						<option>1rem</option>
+						<option>1.5rem</option>
+						<option>2rem</option>
+						<option>24px</option>
+						<option>2vmin</option>
+						<option>clamp(100%, 1rem + 2vw, 24px)</option>
+					</datalist>
+				</div>
+			</article>
+			<article>
+				<div>
+					<label for="viewcollapse">Auto Collapse</label>
+					<select id="viewcollapse" name="viewcollapse" tabindex="104">
+						<option value="0">Off</option>
+						<option value="5">5 Levels</option>
+						<option value="4">4 Levels</option>
+						<option value="3">3 Levels</option>
+						<option value="2">2 Levels</option>
+						<option value="1">1 Level</option>
+					</select>
+				</div>
+				<div>
+					<label for="allowcollapse">Allow Collapse</label>
+					<input id="allowcollapse" name="allowcollapse" type="checkbox" checked="checked" tabindex="105">
+				</div>
+			</article>
+			<article>
+				<div>
+					<label for="itemcounts">Item Counts</label>
+					<input id="itemcounts" name="itemcounts" type="checkbox" tabindex="106">
+				</div>
+				<div>
+					<label for="itemnumbers">Item Numbers</label>
+					<input id="itemnumbers" name="itemnumbers" type="checkbox" tabindex="107">
+				</div>
+			</article>
+			<article>
+				<div>
+					<label for="viewrollups">Roll-ups</label>
+					<input id="viewrollups" name="viewrollups" type="checkbox" tabindex="108">
+				</div>
+			</article>
+		</section>
+		<footer>
+			<h2>OPTIONS</h2>
+			<hr />
+			<section>
+				<div>Theme</div>
+				<div>Theia comes with four themes used for syntax highlighting. The <em>default</em> theme uses Theia&rsquo;s blue branding while the others conform to common color schemes seen in Web development. This represents the <code>.json</code> property.</div>
+				<div>Format</div>
+				<div>While most users will only use the <em>HTML</em> format option, Theia can also display the raw JSON using <em>Plain</em> as well as a <em>Debug</em> view which shows all of the current settings. These represent the three Methods of the object: <code>.html()</code>, <code>.plain()</code> and <code>.debug()</code>.</div>
+				<div>Font<br />Family</div>
+				<div>You can override Theia&rsquo;s default font with any valid <code>font-family</code> value. A number of <a href="https://fonts.google.com/">Google Fonts</a> are attached to the demo in addition to two fonts (Jokerman and Cooper Black) that will only display properly if you have them loaded locally. This represents the <code>.fontfamily</code> property.</div>
+				<div>Font<br />Size</div>
+				<div>Theia defaults to 1rem for font size. Any valid <code>font-size</code> value entered here will override that setting. Examples using different techniques are provided in the list. This represents the <code>.fontsize</code> property.</div>
+				<div>Auto<br />Collapse</div>
+				<div>The default setting of <em>Off</em> will display the entire data tree fully expanded. The other settings will render any node below the selected value collapsed requiring you to expand each of those nodes manually. This represents the <code>.autocollapse</code> property.</div>
+				<div>Allow<br />Collapse</div>
+				<div>Disabling this option will prevent expand/collapse functionality. Combined with Auto Collapse you can restrict how deep the data will render. This represents the <code>.allowcollapse</code> property.</div>
+				<div>Item<br />Counts</div>
+				<div>Theia defaults to a &ldquo;clean&rdquo; display, showing just the data elements. Enabling this option will display a count of the number of descendant items of any array or object. This represents the <code>.itemcounts</code> property.</div>
+				<div>Item<br />Numbers</div>
+				<div>Array and Object members don&rsquo;t have keys, but enabling this option will display each item&rsquo;s member number. This represents the <code>.itemnumbers</code> property.</div>
+				<div>Roll-ups</div>
+				<div>It would be nice to see Object member names rather than numbers, particularly in collapsed views. Enabling this option will instruct Theia to look for the singular of the parent Object's key and create a virtual key. You can see how this works using either the <em>AdventureWorks2014</em> or <em>sakila</em> example datasets which will roll-up objects, columns and views. This represents the <code>.rollups</code> property.</div>
+			</section>
+			<h2>USAGE</h2>
+			<hr />
+			<article>
+				<div>Theia JSON View is a single file, which dynamically creates needed CSS and SVG elements. Load the <code>TheiaJSONView.js</code> with any other scripts and then create an <code>new</code> instance of <code>TheiaJSONView</code> then pass your display container&rsquo;s <code>id</code> to <code>.html()</code>.</div>
+				<div>
+					<pre>
               <code>
-                <div>&lt;script <span class="attribute">type</span>=<span class="element">"text/javascript"</span> <span class="attribute">src</span>=<span class="element">"TheiaJSONView.min.js"</span>&gt;&lt;/script&gt;</div><div>&lt;script&gt;</div><div>  <span class="element">var</span> <span class="js">tjv = </span><span class="element">new</span> <span class="js">TheiaJSONView()<span class="js"></div><div>  <span class="js">tjv.json = </span>{ string: "a string", number: <span class="number">42</span> }</div><div>  <span class="js">tjv.html(</span>'myDiv'<span class="js">)</span></div><div>&lt;/script&gt;</div>
+                <div>&lt;script <span class="attribute">type</span>=<span class="element">"text/javascript"</span> <span class="attribute">src</span>=<span class="element">"TheiaJSONView.min.js"</span>&gt;&lt;/script&gt;</div><div>&lt;script&gt;</div><div>  <span class="element">var</span> <span class="js">tjv = </span><span class="element">new</span> <span class="js">TheiaJSONView()</span></div><div>  <span class="js">tjv.json = </span>{ string: "a string", number: <span class="number">42</span> }</div><div>  <span class="js">tjv.html(</span>'myDiv'<span class="js">)</span></div><div>&lt;/script&gt;</div>
               </code>
             </pre>
-          </div>
-          <div>You can also do everything all at once by passing your JSON Object or String along with your container element and options when you create the instance. A JSON string will automatically be parsed and stored for future output.</div>
-          <div>
-            <pre>
+				</div>
+				<div>You can also do everything all at once by passing your JSON Object or String along with your container element and options when you create the instance. A JSON string will automatically be parsed and stored for future output.</div>
+				<div>
+					<pre>
               <code>
                 <div><span class="element">var</span> <span class="js">tjv =</span> <span class="element">new</span> <span class="js">TheiaJSONView(</span></div><div>  '{ "string": "a string", "number": 42 }',</div><div>  'myDiv',</div><div>  {</div><div>    theme: 'material',</div><div>    fontfamily: 'Consolas',</div><div>    fontsize: '1.5rem',</div><div>    allowcollapse: <span class="element">true</span>,</div><div>    autocollapse: <span class="number">0</span>,</div><div>    rollups: <span class="element">false</span>,</div><div>    itemcounts: <span class="element">false</span>,</div><div>    itemnumbers: <span class="element">false</span></div><div>  }</div><div><span class="js">)</span></div>
               </code>
             </pre>
-          </div>
-          <div>Once you have initialized the object you can make changes to its properties and it will update immediately. Depending on the parameter changed the display will either be re-styled or re-calculated.</div>
-          <div>
-            <pre>
+				</div>
+				<div>Once you have initialized the object you can make changes to its properties and it will update immediately. Depending on the parameter changed the display will either be re-styled or re-calculated.</div>
+				<div>
+					<pre>
               <code>
                 <div><span class="js">tjv.fontsize = </span>'24px' <span class="comment"> //only CSS is updated</span></div><div><span class="js">tjv.itemnumbers = </span><span class="element">true</span> <span class="comment">//new layout required</span></div>
               </code>
             </pre>
-          </div>
-        </article>
-        <img src="prometheus-menu.png" alt="Project Prometheus Icon" />
-        <h3>Part of Project Prometheus</h3>
-        <p>A Concept by Charles Carroll</p>
-      </footer>
-    </article>
-    <script type="text/javascript" src="../dist/TheiaJSONView.min.js"></script>
-    <script type="text/javascript" src="advworks.min.js"></script>
-    <script type="text/javascript" src="sakila.min.js"></script>
-    <script>
-      'use strict'
-      let jt
+				</div>
+			</article>
+			<img src="prometheus-menu.png" alt="Project Prometheus Icon" />
+			<h3>Part of Project Prometheus</h3>
+			<p>A Concept by Charles Carroll</p>
+		</footer>
+	</article>
+	<script type="text/javascript" src="../dist/TheiaJSONView.min.js"></script>
+	<script type="text/javascript" src="advworks.min.js"></script>
+	<script type="text/javascript" src="sakila.min.js"></script>
+	<script>
+		'use strict'
+		let jt
 
-      function updateView(json) {
-        let o
-        var theme = document.getElementById('viewtheme')
-        var ffamily = document.getElementById('viewfont')
-        var fsize = document.getElementById('viewsize')
-        var callow = document.getElementById('allowcollapse')
-        var cauto = document.getElementById('viewcollapse')
-        var rollups = document.getElementById('viewrollups')
-        var icounts = document.getElementById('itemcounts')
-        var inumbers = document.getElementById('itemnumbers')
-        var view = document.getElementById('viewoutput')
-        jt = new TheiaJSONView(json, 'jsonholder', { 
-          'theme': theme.value, 
-          'fontfamily': ffamily.value, 
-          'fontsize': fsize.value, 
-          'allowcollapse':  callow.checked,
-          'autocollapse': Number(cauto.value), 
-          'rollups':  rollups.checked,
-          'itemcounts':  icounts.checked,
-          'itemnumbers':  inumbers.checked
-        })
-      }
-      function initialTest() {
-        updateView({string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,NaN:NaN,function:function(){return 'foo bar'},url:"http://vgpavilion.com",array:["item1","item2","item3"],object:{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,function:function(){return 'foo bar'},url:"http://vgpavilion.com"},"array of objects":[{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,NaN:NaN,function:function(){return 'foo bar'},url:"http://vgpavilion.com",array:["item1","item2","item3"],object:{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,function:function(){return 'foo bar'},url:"http://vgpavilion.com"}},{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,NaN:NaN,function:function(){return 'foo bar'},url:"http://vgpavilion.com",array:["item1","item2","item3"],object:{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,function:function(){return 'foo bar'},url:"http://vgpavilion.com"}},{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,NaN:NaN,function:function(){return 'foo bar'},url:"http://vgpavilion.com",array:["item1","item2","item3"],object:{string:"string value",number:42,boolean:!0,date:"2013-10-21T13:28:06.419Z",null:null,undefined:void 0,function:function(){return 'foo bar'},url:"http://vgpavilion.com"}}]})
-      }
+		function updateView(json) {
+			let o
+			var theme = document.getElementById('viewtheme')
+			var ffamily = document.getElementById('viewfont')
+			var fsize = document.getElementById('viewsize')
+			var callow = document.getElementById('allowcollapse')
+			var cauto = document.getElementById('viewcollapse')
+			var rollups = document.getElementById('viewrollups')
+			var icounts = document.getElementById('itemcounts')
+			var inumbers = document.getElementById('itemnumbers')
+			var view = document.getElementById('viewoutput')
+			jt = new TheiaJSONView(json, 'jsonholder', {
+				'theme': theme.value,
+				'fontfamily': ffamily.value,
+				'fontsize': fsize.value,
+				'allowcollapse': callow.checked,
+				'autocollapse': Number(cauto.value),
+				'rollups': rollups.checked,
+				'itemcounts': icounts.checked,
+				'itemnumbers': inumbers.checked
+			})
+		}
+		function initialTest() {
+			updateView({ string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, NaN: NaN, function: function () { return 'foo bar' }, url: "http://vgpavilion.com", array: ["item1", "item2", "item3"], object: { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, function: function () { return 'foo bar' }, url: "http://vgpavilion.com" }, "array of objects": [{ string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, NaN: NaN, function: function () { return 'foo bar' }, url: "http://vgpavilion.com", array: ["item1", "item2", "item3"], object: { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, function: function () { return 'foo bar' }, url: "http://vgpavilion.com" } }, { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, NaN: NaN, function: function () { return 'foo bar' }, url: "http://vgpavilion.com", array: ["item1", "item2", "item3"], object: { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, function: function () { return 'foo bar' }, url: "http://vgpavilion.com" } }, { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, NaN: NaN, function: function () { return 'foo bar' }, url: "http://vgpavilion.com", array: ["item1", "item2", "item3"], object: { string: "string value", number: 42, boolean: !0, date: "2013-10-21T13:28:06.419Z", null: null, undefined: void 0, function: function () { return 'foo bar' }, url: "http://vgpavilion.com" } }] })
+		}
 
-      function setupPage() {
-        var theme = document.getElementById('viewtheme')
-        var ffamily = document.getElementById('viewfont')
-        var fsize = document.getElementById('viewsize')
-        var callow = document.getElementById('allowcollapse')
-        var cauto = document.getElementById('viewcollapse')
-        var rollups = document.getElementById('viewrollups')
-        var icounts = document.getElementById('itemcounts')
-        var inumbers = document.getElementById('itemnumbers')
-        var view = document.getElementById('viewoutput')
-        var examples = document.getElementById('exlist')
-        var custom = document.getElementById('demo_custom')
+		function setupPage() {
+			var theme = document.getElementById('viewtheme')
+			var ffamily = document.getElementById('viewfont')
+			var fsize = document.getElementById('viewsize')
+			var callow = document.getElementById('allowcollapse')
+			var cauto = document.getElementById('viewcollapse')
+			var rollups = document.getElementById('viewrollups')
+			var icounts = document.getElementById('itemcounts')
+			var inumbers = document.getElementById('itemnumbers')
+			var view = document.getElementById('viewoutput')
+			var examples = document.getElementById('exlist')
+			var custom = document.getElementById('demo_custom')
 
-        theme.addEventListener('change', function () { jt.theme = theme.value })
-        ffamily.addEventListener('change', function () { jt.fontfamily = ffamily.value })
-        fsize.addEventListener('change', function () { jt.fontsize = fsize.value })
-        callow.addEventListener('change', function () { jt.allowcollapse = callow.checked })
-        cauto.addEventListener('change', function () { jt.autocollapse = Number(cauto.value) })
-        rollups.addEventListener('change', function () { jt.rollups = rollups.checked })
-        icounts.addEventListener('change', function () { jt.itemcounts = icounts.checked })
-        inumbers.addEventListener('change', function () { jt.itemnumbers = inumbers.checked })
-        view.addEventListener('change', function () {
-          let o
-          switch (view.value) {
-            case 'plain':
-              jt.plain('jsonholder')
-              break
-            case 'debug':
-              jt.debug('jsonholder')
-              break
-            default:
-             jt.html('jsonholder')
-          }
-        })
-        examples.addEventListener('change', function () {
-          var t = document.getElementById('extext')
-          var d = document.getElementById('jsonholder')
-          var w = this.value
-          if (w === '' && t.value !== '') {
-            return
-          }
-          t.value = ''
-          d.innerHTML = '<h2>Processing&hellip;</h2>'
-          if ( w == '' ) {
-            initialTest()
-          } else if (w.substring(0, 7) === 'inline-') {
-              switch (w) {
-                case 'inline-advworks':
-                  updateView(advworks)
-                  break
-                case 'inline-sakila':
-                  updateView(sakila)
-                  break
-              }
-          } else {
-            fetch(w)
-              .then(response => response.json())
-              .then(data => { updateView(data) })
-              .catch(error => { d.innerHTML = error.message })
-          }
-        })
-        custom.addEventListener('click', function () {
-          var c = document.getElementById('exlist')
-          var d = document.getElementById('jsonholder')
-          var w = document.getElementById('extext')
-          var j = w.value
-          c.value = ''
-          d.innerHTML = '<h2>Processing&hellip;</h2>'
-          if (j === '') {
-            initialTest()
-          }  else if (j.substring(0, 4) === 'http') {
-            fetch(j)
-              .then(response => response.json())
-              .then(data => { updateView(data) })
-              .catch(error => { d.innerHTML = error.message })
-          } else {
-            updateView(j)
-          }
-        })
-        initialTest()
-      }
+			theme.addEventListener('change', function () { jt.theme = theme.value })
+			ffamily.addEventListener('change', function () { jt.fontfamily = ffamily.value })
+			fsize.addEventListener('change', function () { jt.fontsize = fsize.value })
+			callow.addEventListener('change', function () { jt.allowcollapse = callow.checked })
+			cauto.addEventListener('change', function () { jt.autocollapse = Number(cauto.value) })
+			rollups.addEventListener('change', function () { jt.rollups = rollups.checked })
+			icounts.addEventListener('change', function () { jt.itemcounts = icounts.checked })
+			inumbers.addEventListener('change', function () { jt.itemnumbers = inumbers.checked })
+			view.addEventListener('change', function () {
+				let o
+				switch (view.value) {
+					case 'plain':
+						jt.plain('jsonholder')
+						break
+					case 'debug':
+						jt.debug('jsonholder')
+						break
+					default:
+						jt.html('jsonholder')
+				}
+			})
+			examples.addEventListener('change', function () {
+				var t = document.getElementById('extext')
+				var d = document.getElementById('jsonholder')
+				var w = this.value
+				if (w === '' && t.value !== '') {
+					return
+				}
+				t.value = ''
+				d.innerHTML = '<h2>Processing&hellip;</h2>'
+				if (w == '') {
+					initialTest()
+				} else if (w.substring(0, 7) === 'inline-') {
+					switch (w) {
+						case 'inline-advworks':
+							updateView(advworks)
+							break
+						case 'inline-sakila':
+							updateView(sakila)
+							break
+					}
+				} else {
+					fetch(w)
+						.then(response => response.json())
+						.then(data => { updateView(data) })
+						.catch(error => { d.innerHTML = error.message })
+				}
+			})
+			custom.addEventListener('click', function () {
+				var c = document.getElementById('exlist')
+				var d = document.getElementById('jsonholder')
+				var w = document.getElementById('extext')
+				var j = w.value
+				c.value = ''
+				d.innerHTML = '<h2>Processing&hellip;</h2>'
+				if (j === '') {
+					initialTest()
+				} else if (j.substring(0, 4) === 'http') {
+					fetch(j)
+						.then(response => response.json())
+						.then(data => { updateView(data) })
+						.catch(error => { d.innerHTML = error.message })
+				} else {
+					updateView(j)
+				}
+			})
+			initialTest()
+		}
 
-      if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
-        setupPage()
-      } else {
-        document.addEventListener("DOMContentLoaded", setupPage)
-      }
-    </script>
-  </body>
+		if (document.readyState === "complete" || (document.readyState !== "loading" && !document.documentElement.doScroll)) {
+			setupPage()
+		} else {
+			document.addEventListener("DOMContentLoaded", setupPage)
+		}
+	</script>
+</body>
+
 </html>
