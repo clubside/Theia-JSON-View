@@ -111,7 +111,7 @@ class TheiaJSONView {
 
 			.tjv_float button svg {
 				height: 1.3rem;
-				width: auto;
+				width: 1.3rem;
 				shape-rendering: geometricprecision;
 			}
 
