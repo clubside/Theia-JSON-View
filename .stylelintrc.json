@@ -154,7 +154,7 @@
 		"no-irregular-whitespace": true,
 		"no-missing-end-of-source-newline": true,
 		"number-leading-zero": "always",
-		"number-max-precision": 4,
+		"number-max-precision": 10,
 		"number-no-trailing-zeros": true,
 		"property-case": "lower",
 		"property-no-unknown": true,

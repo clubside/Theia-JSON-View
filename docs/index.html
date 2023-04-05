@@ -22,7 +22,7 @@
 			<p><em>&ldquo;There are many like it, but this one is mine.&rdquo;</em></p>
 			<section>Visualize your JavaScript/JSON data with syntax highlighting, collapsible nodes, inline links and images plus other customizations. Choose an example dataset from the list or provide your own. The viewer itself offers a fullsreen mode in capable browsers, enlarge and shrink buttons to size the area for mobile devices without <code>resize</code> support, and copy data to clipboard functionality.</section>
 		</header>
-		<section class="demo_data">
+		<section class="demo-data">
 			<div>
 				<label for="exlist">Examples</label>
 				<select id="exlist" name="exlist" tabindex="1">
@@ -41,16 +41,16 @@
 			<div>
 				<label for="extext">Enter JSON or URL</label>
 				<textarea id="extext" name="extext" placeholder="{ &hellip; }" tabindex="2"></textarea>
-				<div class="demo_button_holder"><button class="demo_button" id="demo_custom" name="demo_custom" type="button" tabindex="3">VIEW</button></div>
+				<div class="demo-button-holder"><button class="demo-button" id="demo-custom" name="demo-custom" type="button" tabindex="3">VIEW</button></div>
 			</div>
 		</section>
-		<section class="demo_display">
+		<section class="demo-display">
 			<article>
 				<div id="jsonholder">
 				</div>
 			</article>
 		</section>
-		<section class="demo_options">
+		<section class="demo-options">
 			<article>
 				<div>
 					<label for="viewtheme">Theme</label>
@@ -163,28 +163,44 @@
 			<hr />
 			<article>
 				<div>Theia JSON View is a single file, which dynamically creates needed CSS and SVG elements. Load the <code>TheiaJSONView.js</code> with any other scripts and then create an <code>new</code> instance of <code>TheiaJSONView</code> then pass your display container&rsquo;s <code>id</code> to <code>.html()</code>.</div>
-				<div>
-					<pre>
-              <code>
-                <div>&lt;script <span class="attribute">type</span>=<span class="element">"text/javascript"</span> <span class="attribute">src</span>=<span class="element">"TheiaJSONView.min.js"</span>&gt;&lt;/script&gt;</div><div>&lt;script&gt;</div><div>  <span class="element">var</span> <span class="js">tjv = </span><span class="element">new</span> <span class="js">TheiaJSONView()</span></div><div>  <span class="js">tjv.json = </span>{ string: "a string", number: <span class="number">42</span> }</div><div>  <span class="js">tjv.html(</span>'myDiv'<span class="js">)</span></div><div>&lt;/script&gt;</div>
-              </code>
-            </pre>
+				<div class="code-block">
+					<div>1<br>2<br>3<br>4<br>5<br>6</div>
+					<div>
+						&lt;script <span class="attribute">type</span>=<span class="element">"text/javascript"</span> <span class="attribute">src</span>=<span class="element">"TheiaJSONView.min.js"</span>&gt;&lt;/script&gt;<br>
+						&lt;script&gt;<br>
+						&nbsp;&nbsp;<span class="element">var</span> <span class="js">tjv = </span><span class="element">new</span> <span class="js">TheiaJSONView()</span><br>
+						&nbsp;&nbsp;<span class="js">tjv.json = </span>{ string: "a string", number: <span class="number">42</span> }<br>
+						&nbsp;&nbsp;<span class="js">tjv.html(</span>'myDiv'<span class="js">)</span><br>
+						&lt;/script&gt;
+					</div>
 				</div>
 				<div>You can also do everything all at once by passing your JSON Object or String along with your container element and options when you create the instance. A JSON string will automatically be parsed and stored for future output.</div>
-				<div>
-					<pre>
-              <code>
-                <div><span class="element">var</span> <span class="js">tjv =</span> <span class="element">new</span> <span class="js">TheiaJSONView(</span></div><div>  '{ "string": "a string", "number": 42 }',</div><div>  'myDiv',</div><div>  {</div><div>    theme: 'material',</div><div>    fontfamily: 'Consolas',</div><div>    fontsize: '1.5rem',</div><div>    allowcollapse: <span class="element">true</span>,</div><div>    autocollapse: <span class="number">0</span>,</div><div>    rollups: <span class="element">false</span>,</div><div>    itemcounts: <span class="element">false</span>,</div><div>    itemnumbers: <span class="element">false</span></div><div>  }</div><div><span class="js">)</span></div>
-              </code>
-            </pre>
+				<div class="code-block">
+					<div>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14</div>
+					<div>
+						<span class="element">var</span> <span class="js">tjv =</span> <span class="element">new</span> <span class="js">TheiaJSONView(</span><br>
+						&nbsp;&nbsp;'{ "string": "a string", "number": 42 }',<br>
+						&nbsp;&nbsp;'myDiv',<br>
+						&nbsp;&nbsp;{<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;theme: 'material',<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;fontfamily: 'Consolas',<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;fontsize: '1.5rem',<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;allowcollapse: <span class="element">true</span>,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;autocollapse: <span class="number">0</span>,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;rollups: <span class="element">false</span>,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;itemcounts: <span class="element">false</span>,<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;itemnumbers: <span class="element">false</span><br>
+						&nbsp;&nbsp;}<br>
+						<span class="js">)</span>
+					</div>
 				</div>
 				<div>Once you have initialized the object you can make changes to its properties and it will update immediately. Depending on the parameter changed the display will either be re-styled or re-calculated.</div>
-				<div>
-					<pre>
-              <code>
-                <div><span class="js">tjv.fontsize = </span>'24px' <span class="comment"> //only CSS is updated</span></div><div><span class="js">tjv.itemnumbers = </span><span class="element">true</span> <span class="comment">//new layout required</span></div>
-              </code>
-            </pre>
+				<div class="code-block">
+					<div>1<br>2</div>
+					<div>
+						<span class="js">tjv.fontsize = </span>'24px'&nbsp;&nbsp;<span class="comment">// only CSS is updated</span><br>
+						<span class="js">tjv.itemnumbers = </span><span class="element">true</span>&nbsp;<span class="comment">// new layout required</span>
+					</div>
 				</div>
 			</article>
 			<img src="prometheus-menu.png" alt="Project Prometheus Icon" />
@@ -236,7 +252,7 @@
 			var inumbers = document.getElementById('itemnumbers')
 			var view = document.getElementById('viewoutput')
 			var examples = document.getElementById('exlist')
-			var custom = document.getElementById('demo_custom')
+			var custom = document.getElementById('demo-custom')
 
 			theme.addEventListener('change', function () { jt.theme = theme.value })
 			ffamily.addEventListener('change', function () { jt.fontfamily = ffamily.value })

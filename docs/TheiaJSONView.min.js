@@ -1219,9 +1219,12 @@ class TheiaJSONView {
 						if (json[key].match(this._date)) {
 							// console.log(key+': '+json[key]+' (date)')
 							classValue = 'date'
-						} else if (json[key].substring(0, 4) === 'http' && tjvImageExtensions.includes(json[key].split('.').pop())) {
-							// console.log(key+': '+json[key]+' (url)')
-							strValue = `<a href="${json[key]}"><img src="${json[key]}" /></a>`
+						} else if (json[key].substring(0, 4) === 'http') {
+							const urlObj = new URL(json[key])
+							if (tjvImageExtensions.includes(urlObj.pathname.split('.').pop())) {
+								// console.log(key+': '+json[key]+' (url)')
+								strValue = `<a href="${json[key]}"><img src="${json[key]}" /></a>`
+							}
 						} else if (json[key].substring(0, 4) === 'http') {
 							// console.log(key+': '+json[key]+' (url)')
 							classValue = 'url'
