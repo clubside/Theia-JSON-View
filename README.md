@@ -42,7 +42,7 @@ Default:
 ```js
 {
   theme: 'default',
-  fontfamily: '"Fira Code", "Roboto Mono", Consolas, "Courier New", monospace',
+  fontfamily: 'ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace',
   fontsize: '1rem',
   autocollapse: 0,
   allowcollapse: true,
@@ -54,37 +54,16 @@ Default:
 
 Available configurations:
 
-#### Theme
-
-* `theme`: a string that can be any of these options: `['default', 'dark', 'light', 'material']`.
-
-#### Font Family
-
-* `fontfamily`: a string that is a valid `font-family`.
-
-#### Font Size
-
-* `fontsize`: a string that is a valid `font-size`.
-
-#### Auto Collapse
-
-* `autocollapse`: a number representing how many levels deep to automatically collapse.
-
-#### Allow Collapse
-
-* `allowcollapse`: a boolean that determines whether or not expand/collapse functionality is available to the user. Combined with autocollapse you can restrict how deep the data is visible.
-
-#### Item Counts
-
-* `itemcounts`: a boolean that determines whether or not to display the number of children of an array/object.
-
-#### Item Numbers
-
-* `itemnumbers`: a boolean that determines whether or not to display the item numbers of children as a virtual key.
-
-#### Roll-ups
-
-* `rollups`: a boolean that determines whether or not to look at child objects for the singular of the parent and use that value as a key.
+| Property | Value |
+| --- | --- |
+| `theme` | a `string` that must be one of these Themes: `['default', 'dark', 'light', 'material']`. |
+| `fontfamily` | a `string` that is a valid CSS `font-family` |
+| `fontsize` | a `string` that is a valid CSS `font-size` |
+| `autocollapse` | a `number` representing how many levels deep to automatically collapse. |
+| `allowcollapse` | a `boolean` that determines whether or not expand/collapse functionality is available to the user. Combined with autocollapse you can restrict how deep the data is visible. |
+| `itemcounts` | a `boolean` that determines whether or not to display the number of children of an array/object. |
+| `itemnumbers` | a `boolean` that determines whether or not to display the item numbers of children as a virtual key. |
+| `rollups` | a `boolean` that determines whether or not to look at child objects for the singular of the parent and use that value as a key. |
 
 ## License
 
